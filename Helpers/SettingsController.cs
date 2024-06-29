@@ -1,4 +1,5 @@
-﻿using Windows.Storage;
+﻿using System.Diagnostics;
+using Windows.Storage;
 
 namespace Inticate_Auto_Clicker.Helpers;
 public class SettingsController
@@ -20,11 +21,16 @@ public class SettingsController
     {
         var localSettings = ApplicationData.Current.LocalSettings;
         localSettings.Values[setting] = value;
+
+        Debug.WriteLine("Saved setting with key of '" + setting + "' and set it's value to " + value + ".");
     }
 
     public bool GetSetting(string setting)
     {
         var localSettings = ApplicationData.Current.LocalSettings;
+
+        Debug.WriteLine("Got setting with key of '" + setting + "' and it's value is " + localSettings.Values[setting] + ".");
+
         return localSettings.Values[setting] != null ? (bool)localSettings.Values[setting] : false;
     }
 }
