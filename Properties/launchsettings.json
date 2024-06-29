@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "Inticate Auto Clicker (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "Inticate Auto Clicker (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}
