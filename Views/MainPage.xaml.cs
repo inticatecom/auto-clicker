@@ -1,6 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using DiscordRPC;
-using DiscordRPC.Logging;
 using Inticate_Auto_Clicker.Helpers;
 using Inticate_Auto_Clicker.ViewModels;
 using Microsoft.UI.Xaml;
@@ -65,7 +63,7 @@ public sealed partial class MainPage : Page
     }
 
     // Mouse click events.
-    private static void MouseClick(String type)
+    private static void MouseClick(string type)
     {
         switch (type)
         {

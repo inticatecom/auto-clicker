@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Inticate_Auto_Clicker.Views;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.Windows.AppNotifications;
@@ -34,17 +35,25 @@ public class AutoClickerController
         {
             StartBtn.IsEnabled = false;
             StopBtn.IsEnabled = true;
-            var toast = new AppNotificationBuilder().AddText("Clicking Enabled")
-                .AddText("The auto clicker has started.").BuildNotification();
-            AppNotificationManager.Default.Show(toast);
+
+            if (SettingsPage.NOTIFICATIONS_ENABLED)
+            {
+                var toast = new AppNotificationBuilder().AddText("Clicking Enabled")
+                    .AddText("The auto clicker has started.").BuildNotification();
+                AppNotificationManager.Default.Show(toast);
+            }
         }
         else
         {
             StartBtn.IsEnabled = true;
             StopBtn.IsEnabled = false;
-            var toast = new AppNotificationBuilder().AddText("Clicking Disabled")
-                .AddText("The auto clicker has stopped.").BuildNotification();
-            AppNotificationManager.Default.Show(toast);
+
+            if (SettingsPage.NOTIFICATIONS_ENABLED)
+            {
+                var toast = new AppNotificationBuilder().AddText("Clicking Disabled")
+                    .AddText("The auto clicker has stopped.").BuildNotification();
+                AppNotificationManager.Default.Show(toast);
+            }
         }
     }
 }

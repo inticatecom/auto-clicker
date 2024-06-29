@@ -20,9 +20,9 @@ public sealed partial class MainWindow : WindowEx
         Title = "AppDisplayName".GetLocalized();
 
         // Set window properties.
-        this.SetWindowSize(300, 250);
+        this.SetWindowSize(444, 367);
         this.SetIsResizable(false);
-        IsMaximizable = false;
+        this.SetIsMaximizable(false);
 
         // Setup Discord RPC
         DiscordClient = new DiscordRpcClient("1231110592165707828");
