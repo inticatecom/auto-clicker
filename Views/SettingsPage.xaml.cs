@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Inticate_Auto_Clicker.Helpers;
 using Inticate_Auto_Clicker.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -9,8 +10,8 @@ namespace Inticate_Auto_Clicker.Views;
 public sealed partial class SettingsPage : Page
 {
     // Setting values.
-    public static bool NOTIFICATIONS_ENABLED = true;
-    public static bool ALWAYS_ON_TOP = false;
+    public static bool NOTIFICATIONS_ENABLED = MainWindow.SettingsController.GetSetting("NOTIFICATIONS_ENABLED");
+    public static bool ALWAYS_ON_TOP = MainWindow.SettingsController.GetSetting("ALWAYS_ON_TOP");
 
     public SettingsViewModel ViewModel
     {
@@ -42,29 +43,15 @@ public sealed partial class SettingsPage : Page
 
     private void SaveSettings()
     {
-        var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-        localSettings.Values["NOTIFICATIONS_ENABLED"] = NOTIFICATIONS_ENABLED;
-        localSettings.Values["ALWAYS_ON_TOP"] = ALWAYS_ON_TOP;
+        MainWindow.SettingsController.SetSetting("NOTIFICATIONS_ENABLED", NOTIFICATIONS_ENABLED);
+        MainWindow.SettingsController.SetSetting("ALWAYS_ON_TOP", ALWAYS_ON_TOP);
         Debug.WriteLine("Settings saved.");
     }
 
     private void LoadSettings()
     {
-        var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-        if (localSettings.Values.TryGetValue("NOTIFICATIONS_ENABLED", out var notificationsEnabled))
-        {
-            NotificationsCheckBox.IsChecked = (bool)notificationsEnabled;
-            Debug.WriteLine("Notifications enabled: " + notificationsEnabled);
-        }
-
-        if (localSettings.Values.TryGetValue("ALWAYS_ON_TOP", out var alwaysOnTop))
-        {
-            AlwaysOnTopCheckBox.IsChecked = (bool)alwaysOnTop;
-            Debug.WriteLine("Always on top: " + alwaysOnTop);
-        }
-
+        NotificationsCheckBox.IsChecked = MainWindow.SettingsController.GetSetting("NOTIFICATIONS_ENABLED");
+        AlwaysOnTopCheckBox.IsChecked = MainWindow.SettingsController.GetSetting("ALWAYS_ON_TOP");
         Debug.WriteLine("Settings loaded");
     }
 }

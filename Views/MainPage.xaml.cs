@@ -11,6 +11,7 @@ public sealed partial class MainPage : Page
     // Settings
     public static bool IS_CLICKING = false;
     public static int CLICK_INTERVAL = 1000;
+    public static string CLICKING_TYPE = "left";
 
     // Key binds
     public static uint LEFT_MOUSE_DOWN = 0x02;
@@ -92,7 +93,20 @@ public sealed partial class MainPage : Page
 
     private void KeyChanged(object sender, SelectionChangedEventArgs e)
     {
-        Console.WriteLine("Key changed.");
+        var content = (ComboBox)sender;
+
+        switch (content.SelectedIndex)
+        {
+            case 0:
+                CLICKING_TYPE = "left";
+                break;
+            case 1:
+                CLICKING_TYPE = "right";
+                break;
+            case 2:
+                CLICKING_TYPE = "middle";
+                break;
+        }
     }
 
     // Click loop.
@@ -113,7 +127,7 @@ public sealed partial class MainPage : Page
             // Check if clicking is toggled.
             if (IS_CLICKING)
             {
-                MouseClick("left");
+                MouseClick(CLICKING_TYPE);
                 await Task.Delay(CLICK_INTERVAL);
             }
             else

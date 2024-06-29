@@ -7,8 +7,13 @@ namespace Inticate_Auto_Clicker;
 
 public sealed partial class MainWindow : WindowEx
 {
-    private Microsoft.UI.Dispatching.DispatcherQueue dispatcherQueue;
-    private UISettings settings;
+    private readonly Microsoft.UI.Dispatching.DispatcherQueue dispatcherQueue;
+    private readonly UISettings settings;
+
+    // Application settings
+    public static readonly SettingsController SettingsController = new SettingsController();
+
+    // Discord RPC
     public DiscordRpcClient DiscordClient;
 
     public MainWindow()
